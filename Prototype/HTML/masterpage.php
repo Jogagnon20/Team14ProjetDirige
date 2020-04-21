@@ -15,7 +15,7 @@
     <body>
         <?php include "navigationmodule.php";?>
         <div class="container align-center text-center">
-              <?php  load_modules($content); ?>
+            <?php  load_modules($content); ?>
         </div>
         <footer>
         </footer>
