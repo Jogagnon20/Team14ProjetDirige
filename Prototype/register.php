@@ -6,7 +6,7 @@
         header("Location: ../error.php?ErrorMSG=Already%20Logged!");
         die();
     }
-
+ 
     $title = "Register";
     $module = "registerview.php";
     $content = array();
