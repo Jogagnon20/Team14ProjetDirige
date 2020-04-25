@@ -23,7 +23,14 @@
         <div class="container align-center text-center">
             <?php  load_modules($content); ?>
         </div>
-        <footer>
+        <footer style="text-align:center">
+            <p>Fait par : Danny Léveillé, Guillaume Paquin, Jonathan Gagnon,  Nicolas Dalpé</p>
+            <p id="DateNow"></p>
         </footer>
+
+        <script>
+             var date = new Date().toLocaleDateString();
+            document.getElementById("DateNow").innerHTML = date;
+        </script>
     </body>
 </html>
