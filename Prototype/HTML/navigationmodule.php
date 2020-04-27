@@ -1,9 +1,9 @@
-<?php
-
-    if(isset($_SESSION["userID"])){
+<?php   
+// isset($_SESSION["Client"])
+    if(isset($_SESSION["Client"])){
         $navLinks = '
         <li class="nav-item">
-            <a class="nav-link" href="DOMAINLOGIC/logout.dom.php">LOGOUT</a>
+            <a class="nav-link" href="DOMAINLOGIC/logout.dom.php">Logout</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="Mon Profile.php">Mon Profile</a>
