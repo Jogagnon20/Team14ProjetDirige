@@ -18,4 +18,5 @@ final class Clients{
        $adresseClient = $adresse;
        $telephoneClient = $telephone;
     } 
+}
 ?>
