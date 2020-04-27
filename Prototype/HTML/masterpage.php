@@ -16,14 +16,23 @@
             .showDiv{
                 display: show;
             }
+            .footer {
+                position:fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                color: black;
+                text-align: center;
+                background-color:lightgray;                
+            }
        </style>
     </head>
-    <body>
+    <body style="padding-bottom: 100px">
         <?php include "navigationmodule.php";?>
-        <div class="container align-center text-center">
+        <div class="container">
             <?php  load_modules($content); ?>
         </div>
-        <footer style="text-align:center">
+        <footer class="footer" style="text-align:center; ">
             <p>Fait par : Danny Léveillé, Guillaume Paquin, Jonathan Gagnon,  Nicolas Dalpé</p>
             <p id="DateNow"></p>
         </footer>
