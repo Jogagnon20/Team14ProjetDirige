@@ -47,7 +47,7 @@
                 return false;
             }
 
-            $reg = "^\d{3}[-\s]\d{3}[-\s]\d{4}$|\d{10}^";
+            $reg = "^\d{3}[-]\d{3}[-]\d{4}$^";
             if(preg_match($reg,$phone)){
                 return true;
             }
@@ -60,7 +60,7 @@
                 return false;
             }
 
-            $reg = "/[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d/";
+            $reg = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
             if(preg_match($reg,$pc)){
                 return true;
             }
