@@ -4,12 +4,18 @@ final class Clients{
 
     public $nomClient;
 
+    public $courrielClient;
+
     public $adresseClient;
 
     public $telephoneClient;
 
-    public function __construct($idClient, $nomClient, $adresseClient, $telephoneClient) 
+    public function __construct($id, $nom, $courriel, $adresse, $telephone) 
     { 
-       
+       $idClient = $id;
+       $nomClient = $nom;
+       $courrielClient = $courriel;
+       $adresseClient = $adresse;
+       $telephoneClient = $telephone;
     } 
 ?>
