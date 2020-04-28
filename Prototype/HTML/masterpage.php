@@ -17,13 +17,12 @@
                 display: show;
             }
             .footer {
-                position:fixed;
+                position: relative;
                 left: 0;
                 bottom: 0;
                 width: 100%;
                 color: black;
                 text-align: center;
-                background-color:lightgray;                
             }
        </style>
     </head>
