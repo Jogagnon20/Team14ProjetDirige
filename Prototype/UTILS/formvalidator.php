@@ -20,7 +20,6 @@
             $mybd = null;
             return false;
         }
-
         
         public static function validate_email($email)
         {
@@ -60,7 +59,7 @@
                 return false;
             }
 
-            $reg = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
+            $reg = "/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/";
             if(preg_match($reg,$pc)){
                 return true;
             }
