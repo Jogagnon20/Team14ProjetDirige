@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if(isset($_SESSION["userID"]))
+    if(isset($_SESSION["Client"]))
     {
         header("Location: ../error.php?ErrorMSG=Already%20Logged!");
         die();
