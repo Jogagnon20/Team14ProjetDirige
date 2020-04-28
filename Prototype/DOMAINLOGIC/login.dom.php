@@ -1,14 +1,12 @@
 <?php
     include __DIR__ . "/../UTILS/sessionhandler.php";
-    include __DIR__ . "/../DAL/models.php";
+    include "../DAL/models.php";
+    include "../UTILS/formvalidator.php";
 
 
     session_start();
-
-    if(validate_session()){
-        header("Location: ../error.php?ErrorMSG=already%20logged%20in!");
-        die();
-    }
+    session_destroy();
+    session_start();
     if(isset($_SESSION['Client']))
     {
         header("Location: ../Spectacles.php");
@@ -20,13 +18,25 @@
     $pw = $_POST["pw"];
 
     //Validation Posts*****************************************************
+    if(!Validator::validate_login_email($email)){
+        $_SESSION['errorLogin'] = true;
+        $_SESSION['errorEmailLogin'] = "L'adresse courriel est invalide";
+    }
+    if(!Validator::validate_login_password($pw)){
+        $_SESSION['errorLogin'] = true;
+        $_SESSION['errorPasswordLogin'] = "Le mot de passe est invalide";
+    }
 
-
+    if(isset($_SESSION['errorLogin'])){
+        $_SESSION['emailLogin'] = $email;
+        header("Location: ../login.php");
+        die();
+    }
     //getClient
     $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
-    $stmt = $mybd->prepare("CALL SelectFromClients()");
-    $stmt->execute();
-    while ($donnees = $stmt->fetch())
+    $stmt1 = $mybd->prepare("CALL SelectFromClients()");
+    $stmt1->execute();
+    while ($donnees = $stmt1->fetch())
     {
         if($donnees['email'] == $email){
             $aClient = new Clients($donnees['idClient'], $donnees['nomClient'], $email, $donnees['adresseClient'], $donnees['telephoneClient']);
