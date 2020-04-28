@@ -2,7 +2,7 @@
 <div class="container" style="margin-top:30px">
     <div class="row">
         <div class="col-sm-4">
-            <h2>REGISTER</h2>
+            <h2>Inscription</h2>
             <form method = "post" action = "./DOMAINLOGIC/register.dom.php">
                 
                 <div class="form-group">
@@ -123,7 +123,7 @@
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Veuillez remplir ce champs.</div>
                 </div>
-                <button class="btn btn-success" type="submit">Register</button>
+                <button class="btn btn-success" type="submit">Inscription</button>
             </form>
         </div>
     </div>
