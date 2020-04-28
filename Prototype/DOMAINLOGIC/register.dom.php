@@ -22,7 +22,9 @@
     $pwv = $_POST["pwValidation"];
     $adress = $_POST["adress"];
     $postalCode = $_POST["pc"];
-    
+    if(strlen($postalCode) == 6){
+        $postalCode = substr($postalCode, 0, 3) . " " . substr($postalCode, 3);
+    }
     //Validation Posts
     if(!Validator::validate_email($courriel)){
         $_SESSION['errorEmail'] = "L'adresse courriel existe déjà"; 
