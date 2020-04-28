@@ -5,6 +5,8 @@
 
     session_start();
 
+    session_destroy();
+    session_start();
     if(validate_session()){
         header("Location: ../error.php?ErrorMSG=Already%20logged!");
         die();
@@ -22,29 +24,32 @@
     $postalCode = $_POST["pc"];
     
     //Validation Posts
-    if(!Validator::validate_email($courriel))
-    {
-        http_response_code(400);
-        header("Location: ../error.php?ErrorMSG=invalid email");
-        die();
+    if(!Validator::validate_email($courriel)){
+        $_SESSION['errorEmail'] = "L'adresse courriel existe déjà"; 
+        $_SESSION['error'] = true;
     }
     if(!Validator::validate_password($pw, $pwv)){
-        http_response_code(400);
-        header("Location: ../error.php?ErrorMSG=password");
-        die();
+        $_SESSION['errorPassword'] = "Le mot de passe est invalide"; 
+        $_SESSION['error'] = true;
     }
     if(!Validator::validate_PostalCode($postalCode)){
-        http_response_code(400);
-        header("Location: ../error.php?ErrorMSG=postal code");
-        die();
+        $_SESSION['errorPc'] = "Le code postal est invalide"; 
+        $_SESSION['error'] = true;
     }
     if(!Validator::validate_PhoneNumber($phone)){
-       http_response_code(400);
-       header("Location: ../error.php?ErrorMSG=invalid phone number");
-       die();
+        $_SESSION['errorPhone'] = "Le numéro de téléphone est invalide";
+        $_SESSION['error'] = true; 
     }
-
-    
+        if(isset($_SESSION['error'])){
+            $_SESSION['email'] = $courriel;
+            $_SESSION['name'] = $name;
+            $_SESSION['adress'] = $adress;
+            $_SESSION['phone'] = $phone;
+            $_SESSION['pc'] = $postalCode;
+            header("Location: ../register.php");
+            die();
+        }
+ 
      $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
      $stmt1 = $mybd->prepare("CALL InsertClient(?,?,?,?,?)");
     //  // lier les paramètres
