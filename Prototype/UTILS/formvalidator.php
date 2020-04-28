@@ -21,6 +21,53 @@
             return false;
         }
         
+        public static function passwordExists($pwP){
+            $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
+            
+            $stmt1 = $mybd->prepare("CALL SelectFromClients()");
+            //Liaison des paramètres de la procédure.
+
+            $stmt1->execute(); 
+            
+            while ($donnees = $stmt1->fetch())
+            {
+                if($donnees['password'] == $pwP){
+                    $mybd = null;
+                    return true;
+                }
+            }
+            $mybd = null;
+            return false;
+        }
+
+        public static function validate_login_email($email)
+        {
+            if(empty($email))
+            {
+                return false;
+            }
+            
+            if(self::emailExists($email)){
+                return true;
+            }
+        
+            return false;
+        }
+
+        public static function validate_login_password($pw)
+        {
+            if(empty($pw))
+            {
+                return false;
+            }
+            
+            if(self::passwordExists($pw)){
+                return true;
+            }
+        
+            return false;
+        }
+
         public static function validate_email($email)
         {
             if(empty($email))
