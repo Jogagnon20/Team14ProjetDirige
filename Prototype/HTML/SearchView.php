@@ -19,14 +19,15 @@
     if($res = $stmt->fetch()){
       $idCategorie = $res;
     }
+    $stmt->closeCursor();
   } 
-  $stmt->closeCursor();
+  
   $tabRecherche = array();
   $resultatSpectacles = $mybd->query("CALL SelectFromSpectacles");
   while ($donnees = $resultatSpectacles->fetch(PDO::FETCH_ASSOC)){
     if($rechercheAvance === "NomSpectacle"){
       if(strpos($donnees['NomSpectacle'], $recherche) !== false){
-        array_push($tabRecherche,$donnees[0]);
+        array_push($tabRecherche,$donnees['idSpectacle']);
       }
     }
     if($rechercheAvance === "Categorie"){
@@ -35,12 +36,12 @@
       }
     }
     if($rechercheAvance === "NomArtiste"){
-      if(strpos( $donnees[3],$recherche) !== false){
+      if(strpos( $donnees['artiste'],$recherche) !== false){
         array_push($tabRecherche,$donnees['idSpectacle']);
       }
     }
     if($rechercheAvance === "Description"){
-      if(strpos($donnees[2],$recherche) !== false){
+      if(strpos($donnees['description'],$recherche) !== false){
         array_push($tabRecherche,$donnees['idSpectacle']);
       }
     }
