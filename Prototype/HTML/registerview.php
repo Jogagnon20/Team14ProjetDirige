@@ -107,10 +107,10 @@
                         <?php
                         if(isset($_SESSION['pc'])){
                             $pc = $_SESSION['pc'];
-                            echo "<input type='text' class='form-control' value='$pc' name='pc' id='pc' required>";
+                            echo "<input type='text' class='form-control' value='$pc' name='pc' id='pc' placeholder='Q1Q 1Q1' required>";
                         }
                         else{
-                            echo "<input type='text' class='form-control' value='' name='pc' id='pc' required><br>";
+                            echo "<input type='text' class='form-control' value='' name='pc' id='pc' placeholder='Q1Q 1Q1' required><br>";
                         }
                     ?>
                      <?php
