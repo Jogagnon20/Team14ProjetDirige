@@ -3,7 +3,7 @@
 
     session_start();
 
-    if(!validate_session()){
+    if (!isset($_SESSION['Client'])) {
         header("Location: ../error.php?ErrorMSG=Not%20logged%20in!");
         die();
     }
@@ -12,7 +12,6 @@
     unset($_COOKIE["PHPSESSID"]);
     session_destroy();
 
-    header("Location: ../logout.php");
+    header("Location: ../login.php");
     die();
-
 ?>
