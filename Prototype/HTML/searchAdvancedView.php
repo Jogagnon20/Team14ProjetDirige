@@ -4,15 +4,12 @@
         <select onchange="showDetailsCategorie(this, '#typeCategorie')" name="RechercheAvance" class="form-control">
             <option value="NomSpectacle" selected>Nom du Spectacle</option>
             <option value="NomArtiste">Nom de l'artiste</option>
-            <option value="nomSalle">Nom de salle</option>
+            <option value="NomSalle">Nom de salle</option>
             <option id='test' value="Categorie">Categorie</option>
         </select>
         <hr>
-
         <input type="text" name="search" placeholder="Recherche">
-
         <hr>
-
         <?php
         $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
         $resultatCategorie = $mybd->query("CALL SelectFromCategories");
@@ -45,7 +42,6 @@
             } else {
                 $("#typeCategorie").css("display", "none");
             }
-
         }
     });
 </script>

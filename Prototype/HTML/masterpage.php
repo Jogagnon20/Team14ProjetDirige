@@ -24,6 +24,14 @@
                 color: black;
                 text-align: center;
             }
+            .grid-container {
+                display: grid;
+                grid-template-columns: 50% 25% 25%;
+                grid-template-rows: 1fr 2fr;
+                gap: 1px 1px;
+                grid-template-areas: "Picture title title" "Picture description Salles";
+                background-color:lightgray;
+}
        </style>
     </head>
     <body style="padding-bottom: 100px">
