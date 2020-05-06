@@ -17,9 +17,9 @@
     }
     $i++;
   }
-  
-  if(empty($recherche) && strpos($rechercheAvance,"Categorie")){
-    $test = $mybd->query("CALL SelectFromSpectacles");
+  if(empty($recherche) && $rechercheAvance !== "Categorie" ){
+    $mybd2 = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14'); 
+    $test = $mybd2->query("CALL BaseSortSpectacles");
     while ($val = $test->fetch(PDO::FETCH_ASSOC)){
       array_push($tabRecherche, $val['idSpectacle']);
     }
@@ -57,7 +57,7 @@
     if($rechercheAvance === "NomArtiste"){
       $resultatSpectacles = $mybd->query("CALL SelectForArtistesSpectacles");
       while($donnees = $resultatSpectacles->fetch(PDO::FETCH_ASSOC)){
-        if(strpos($donnees['artiste'],$recherche) !== false){
+        if(strpos( strtolower($donnees['artiste']),  strtolower($recherche)) !== false){
           array_push($tabRecherche,$donnees['idSpectacle']);
         }
       }
@@ -81,7 +81,7 @@
 					array_push($sallesParSpectacle, $donnesSalles['nomSalles']);
 		  		}
 			}
-
+      $idCategorie = $donnees['idCategorie'];
       $id = $donnees['idSpectacle'];
       $description = $donnees['description'];
       $titre = $donnees['nomSpectacle'];
