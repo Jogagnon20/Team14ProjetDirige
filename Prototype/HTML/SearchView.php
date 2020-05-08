@@ -66,21 +66,14 @@
     if(count($tabRecherche)===0){
       echo "Aucun résultat trouvé...";
     }
-  }
+  }echo "
+				<div class='grid-container'>";
   foreach($tabRecherche as $item){
     $stmt = $mybd->prepare("CALL GetSpectacleById(?)");
     $stmt->bindParam(1,$item);
     $stmt->execute();
+    
     while($donnees = $stmt->fetch(PDO::FETCH_ASSOC)){
-      $sallesParSpectacle = array();
-			for($i = 0;$i<count($donnees);$i++){
-		  		$val = $mybd->prepare("CALL SelectForSallesSpectacles(?)");
-		  		$val->bindParam(1,$i);
-		  		$val->execute();
-		  		while($donnesSalles = $val->fetch(PDO::FETCH_ASSOC)){
-					array_push($sallesParSpectacle, $donnesSalles['nomSalles']);
-		  		}
-			}
       $idCategorie = $donnees['idCategorie'];
       $id = $donnees['idSpectacle'];
       $description = $donnees['description'];
@@ -88,56 +81,50 @@
       $artiste = $donnees['artiste'];
       $GUID = $donnees['GUID'];
       $prix = $donnees['prix_de_base'];
-    // <button style='border: 2px solid yellow;float: right;overflow: auto;'
-    //         onclick="."showDetails('spectacle$id')".">
-    //         <img style='border: 2px solid yellow;float: right;overflow: auto; width: 20px;height: 20px;'src='Images/triangle.png' alt='plus'>
-    //       </button>
       echo "
-      <div class='grid-container'>
-        <div style='grid-area: Picture;'>
-          <a href='DetailSpectacle.php?id=$id'><img class='rounded' width='304' height='236' src='Images/$GUID' alt='$titre'></a>
+      <div style='display:grid; grid-template-columns: 60% 40%; padding-left:10px'>
+        <div>
+          <div>
+            <b style='font-size:30px; align-content:center'>
+              $titre
+            </b> 
+            <a href='Achats.php' style='float:right'>
+              <button >
+                Achat
+              </button></a>
+          </div>
+          <a href='DetailSpectacle.php?id=$id'>
+            <img class='rounded' width='304' height='236' src='Images/$GUID' alt='$titre'>
+          </a>
         </div>
-        <div style='grid-area: title;'>
-          <span style='font-size:30px; align-content:center'><b>$titre</b></span><br>
-        </div>
-        <div style='grid-area: description;'>
+        <div style='font-size:22px'>
+        <br>
+        <br>
+        <br>
           <span>Fait par: $artiste</span><br>
-          <span>Prix de base: $prix$</span><br> 
+          <span>Prix de base: $prix$</span><br>  
           <span>Categorie: ";
-							switch($idCategorie){
-								case 'HUM':
-									echo 'Humour';
-									break;
-								case 'MAG':
-									echo 'Magie';
-									break;
-								case 'DAN':
-									echo 'Danse';
-									break;
-								case 'MUS':
-									echo 'Musique';
-									break;
-								case 'DRA':
-									echo 'Drame';
-									break;
-							}
-            echo "</span>
-        </div>
-        <div style='grid-area: Salles;'>
-          <span>Il prendra place au:<br>
-          <ul>";
-					foreach(GetSallesSpectacles($id) as $item){
-						echo "<li>$item </li>";
-					}
-					echo" </ul></span><br> 
-        </div>
-      </div>
-      <div class='hiddenDiv' id='spectacle$id'>
-        Détails spectacle
-        <button><a href='panier.php?id=spectacle$id'>Acheter</a></button>
-      </div>
-      <hr>";
-      }
+            switch($idCategorie){
+              case 'HUM':
+                echo 'Humour';
+                break;
+              case 'MAG':
+                echo 'Magie';
+                break;
+              case 'DAN':
+                echo 'Danse';
+                break;
+              case 'MUS':
+                echo 'Musique';
+                break;
+              case 'DRA':
+                echo 'Drame';
+                break;
+            }
+        echo "</span>
+        </div>";
+  }
+  echo "</div>";
     }
     function GetSallesSpectacles($id){
       $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
@@ -150,8 +137,6 @@
       }
       return $sallesParSpectacle;
     }
-  
-  
 ?>
 <script>
 	function showDetails(id){

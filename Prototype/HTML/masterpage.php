@@ -26,17 +26,15 @@
             }
             .grid-container {
                 display: grid;
-                grid-template-columns: 50% 25% 25%;
-                grid-template-rows: 1fr 2fr;
+                grid-template-columns: 50% 50%;
                 gap: 1px 1px;
-                grid-template-areas: "Picture title title" "Picture description Salles";
                 background-color:lightgray;
 }
        </style>
     </head>
     <body style="padding-bottom: 100px">
         <?php include "navigationmodule.php";?>
-        <div class="container">
+        <div style="width:85%; margin-left:auto;margin-right:auto">
             <?php  load_modules($content); ?>
         </div>
         <footer class="footer" style="text-align:center; ">
