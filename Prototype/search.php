@@ -1,7 +1,7 @@
 <?php
   session_start();
   
-    $title="search";
+    $title="Recherche";
 
     $content = array();
     array_push($content, "searchview.php");
