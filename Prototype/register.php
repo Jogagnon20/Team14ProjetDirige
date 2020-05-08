@@ -8,7 +8,7 @@
         die();
     }
     
-    $title = "S'incrire";
+    $title = "Inscription";
     $module = "registerview.php";
     $content = array();
     array_push($content, $module);
