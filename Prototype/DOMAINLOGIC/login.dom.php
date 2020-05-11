@@ -44,7 +44,20 @@
     }
     $mybd = null;
     $_SESSION['Client'] = $aClient;
+
     
+    $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
+    $stmt1 = $mybd->prepare("CALL SelectIsAdminClient(?)");
+    $stmt1->bindParam(1, $emailP);
+    $emailP = $email;
+    $stmt1->execute();
+    while ($donnees = $stmt1->fetch())
+    {
+        if($donnees['isAdmin'] == 1){
+            $_SESSION['Admin'] = true;
+        }
+    }
+    $mybd = null;
 
 
     header("Location: ../Spectacles.php");
