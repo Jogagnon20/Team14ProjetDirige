@@ -1,14 +1,31 @@
-<?php   
-// isset($_SESSION["Client"])
+<?php       
     if(isset($_SESSION["Client"])){
-        $navLinks = '
-        <li class="nav-item">
-            <a class="nav-link" href="DOMAINLOGIC/logout.dom.php">Déconnexion</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="Mon Profile.php">Mon Profile</a>
-        </li>
-        ';
+        if(isset($_SESSION["Admin"])){
+            $navLinks = '            
+            <li class="nav-item">
+                <a class="nav-link" href="monProfil.php">Mon Profil</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="ajoutSpectacle.php">Ajout Spectacle</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="DOMAINLOGIC/logout.dom.php">Déconnexion</a>
+            </li>
+            ';            
+        }
+        else{            
+            $navLinks = '            
+            <li class="nav-item">
+                <a class="nav-link" href="monProfil.php">Mon Profil</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="DOMAINLOGIC/logout.dom.php">Déconnexion</a>
+            </li>
+            ';
+        }
     }
     else{
     $navLinks = '
@@ -19,6 +36,7 @@
         <a class="nav-link" href="register.php">Inscription</a>
     </li>';
     }
+    
 ?>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark mb-4 text-capitalize">
     <div class="container collapse navbar-collapse">
