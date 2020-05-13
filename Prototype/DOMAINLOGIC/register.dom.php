@@ -60,6 +60,7 @@
      $stmt1->bindParam(3, $telephone);
      $stmt1->bindParam(4, $email);
      $stmt1->bindParam(5, $motDePasse);
+    
       // affectation de valeurs aux paramètres
      $nomClient = $name;
      $adresse = $adress."|".$postalCode;
