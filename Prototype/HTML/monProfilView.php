@@ -6,6 +6,7 @@
                 <div class="form-group">
                     <label for="Nom">Nom</label>
                     <?php
+                        
                         $clientInfo = get_object_vars($_SESSION['Client']);
                         $nomClient = $clientInfo['nomClient'];
                         echo "<input type='text' class='form-control' value='$nomClient' name='$nomClient' id='nomClient' required>";
@@ -45,7 +46,18 @@
                     <?php
                         $clientInfo = get_object_vars($_SESSION['Client']);
                         $adresseClient = $clientInfo['adresseClient'];
-                        echo "<input type='text' class='form-control' value='$adresseClient' id='adresseClient' required>";
+                        $splitAdresse = explode("|", $adresseClient);
+                        echo "<input type='text' class='form-control' value='$splitAdresse[0]' id='adresseClient' required>";
+                    ?>
+                </div>
+                <div class="form-group">
+                    <label for="adresse">Code Postal</label>
+                    <?php
+                        $clientInfo = get_object_vars($_SESSION['Client']);
+                        $adresseClient = $clientInfo['adresseClient'];
+                        $splitAdresse = explode("|", $adresseClient);
+
+                        echo "<input type='text' class='form-control' value='$splitAdresse[1]' id='adresseClient' required>";
                     ?>
                 </div>
                 <button class="btn btn-success" type="submit">Enregistrer les changements</button>
