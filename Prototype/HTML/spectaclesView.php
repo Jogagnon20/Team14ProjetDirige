@@ -3,7 +3,7 @@
 	try
 	{
 		$Spectacles = array();
-		$mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
+		$mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'prototype14');
 		$resultat = $mybd->query("call BaseSortSpectacles");
 		echo "
 				<div class='grid-container'>";
@@ -72,7 +72,7 @@
 	$mybd=null;
 
 	function GetSallesSpectacles($id){
-		$mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
+		$mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'prototype14');
 		$val = $mybd->prepare("CALL SelectForSallesSpectacles(?)");
 		$val->bindParam(1,$id);
 		$val->execute();

@@ -11,7 +11,7 @@
         <input type="text" name="search" placeholder="Recherche">
         <hr>
         <?php
-        $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
+        $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'prototype14');
         $resultatCategorie = $mybd->query("CALL SelectFromCategories");
         $i = 0;
         echo "<div style='display:none' id='typeCategorie'><h3>Liste de catégorie</h3>";
