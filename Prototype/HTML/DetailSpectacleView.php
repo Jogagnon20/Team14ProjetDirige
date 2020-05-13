@@ -1,6 +1,6 @@
 <?php 
     $id = $_GET['id'];
-    $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14'); 
+    $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'prototype14'); 
     $stmt = $mybd->prepare("CALL GetSpectacleById(?)");
     $stmt->bindParam(1,$id);
     $stmt->execute();
