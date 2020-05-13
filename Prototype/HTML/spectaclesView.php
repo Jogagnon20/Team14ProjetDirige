@@ -23,10 +23,11 @@
 							<b style='font-size:30px; align-content:center'>
 								$titre
 							</b> 
-							<a href='Achats.php' style='float:right'>
-								<button >
+							<a href='Achats.php?id=$id' style='float:right'>
+								<button>
 									Achat
-								</button></a>
+								</button>
+							</a>
 						</div>
 						<a href='DetailSpectacle.php?id=$id'>
 							<img class='rounded' width='304' height='236' src='Images/$GUID' alt='$titre'>
