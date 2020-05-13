@@ -11,6 +11,10 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="panier.php">Panier</a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="DOMAINLOGIC/logout.dom.php">Déconnexion</a>
             </li>
             ';            
@@ -19,6 +23,10 @@
             $navLinks = '            
             <li class="nav-item">
                 <a class="nav-link" href="monProfil.php">Mon Profil</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="panier.php">Panier</a>
             </li>
 
             <li class="nav-item">
