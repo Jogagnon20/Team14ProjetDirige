@@ -20,7 +20,8 @@
             </div>
             <div style='text-align:center'>   
                 <h1>$titre</h1> <hr>
-                Salles + nbPacesParSalle: <a href='Achats.php'>Achat</a><hr>
+                Salles + nbPacesParSalle: <a href='Achats.php?id=$id'>Achat</a>
+                <hr>
                 Categorie: ";
                  switch($idCategorie){
                     case 'HUM':
