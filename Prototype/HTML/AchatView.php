@@ -26,7 +26,7 @@
                 <label> Salles de spectacle</label>
                 <form action='Panier.php'>
                 <div>
-                <select id='salles' onChange='DisplaySelect();' name='salle'><option disabled selected>Choisir une Salle</option>";
+                <select id='salles' onChange='DisplaySelect()' name='salle'><option disabled selected>Choisir une Salle</option>";
                 foreach(GetSallesSpectacles($id) as $item){
                     echo "<option value='$item' prix='$prix'>$item</option>";
                 }
@@ -36,7 +36,7 @@
                     echo "
                         <div style='display:none' id='$item2'>
                         <label> Section de la salle<br> <b>$item2</b></label>
-                        <select id='section' name='section' onChange='CalculerPrix()'><option disabled selected>Choisir une section</option>";
+                        <select id='section$item2' name='section' onChange='CalculerPrix()'><option disabled selected>Choisir une section</option>";
                         foreach(GetSectionsSalles($item2) as $sections)
                         {
                             $prixSection = $sections['fm_prix'];
@@ -45,7 +45,7 @@
                         }
                         echo "</select><hr>
                         
-                        <label> Heure du Spectacle<br> <b>$item2</b></label>
+                        <label> Heure du Spectacle <br> </label>
                         <select id='heure' name='date'><option disabled selected>Choisir une heure</option>";
                         foreach(GetHeureSpectacle($id,$item2) as $heure)
                             {
@@ -110,7 +110,6 @@
 var prixSection;
 var prixSpectacles;
 $(document).ready(function(){
-    
     ChercherPrixSpectacle()
 });
 function ChercherPrixSpectacle(){
@@ -128,9 +127,10 @@ function DisplaySelect() {
 }
 function CalculerPrix() {
     var DivPrix = document.getElementById("Prix");
-    var section = document.getElementById("section");
+    var Spectacle = document.getElementById("salles");
+    var section = document.getElementById("section"+Spectacle.value);
     var nbBillet = document.getElementById("nbBillet");
-    
+   
     ChercherPrixSections(section);
     if(!isNaN(prixSection)){
         prix = prixSection;
@@ -157,8 +157,8 @@ function ChercherPrixSections(select){
     for(i=1;i<select.length;i++){
         if(select.options[i].value == select.value){
             prixSection = parseFloat(select.options[i].getAttribute('prix'));
+            
         }
     }
 }
-
 </script>
