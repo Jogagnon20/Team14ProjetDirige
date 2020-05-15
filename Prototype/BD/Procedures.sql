@@ -82,6 +82,25 @@ BEGIN
 select * from Spectacles;
 end
 $$
+delimiter $$
+drop procedure if exists SelectOrderClients
+$$
+delimiter $$
+create procedure SelectOrderClients()
+BEGIN
+select nomClient, adresseClient, telephoneClient, email, COUNT(noBillet) as nbBillets from Clients c
+	inner join Billets b on c.idClient = b.idClient group by nomClient, adresseClient, telephoneClient order by nbBillets;
+end
+$$
+delimiter $$
+drop procedure if exists SelectClientWhereId
+$$
+delimiter $$
+create procedure SelectClientWhereId(in id int)
+BEGIN
+select * from Clients where Clients.idClient = id;
+end
+$$
 
 ################################Inserts
 delimiter $$
