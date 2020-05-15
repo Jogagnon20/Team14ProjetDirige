@@ -33,7 +33,7 @@
         die();
     }
     //getClient
-    $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
+    $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
     $stmt1 = $mybd->prepare("CALL SelectFromClients()");
     $stmt1->execute();
     while ($donnees = $stmt1->fetch())
@@ -44,9 +44,8 @@
     }
     $mybd = null;
     $_SESSION['Client'] = $aClient;
-
     
-    $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
+    $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
     $stmt1 = $mybd->prepare("CALL SelectIsAdminClient(?)");
     $stmt1->bindParam(1, $emailP);
     $emailP = $email;
