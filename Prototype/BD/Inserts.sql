@@ -141,9 +141,10 @@ $$
 #g. Au moins 3 clients
 delimiter $$
 ALTER TABLE Clients AUTO_INCREMENT = 1;
-insert into Clients (nomClient, adresseClient, telephoneClient, email, password) values ('Bob', '23 rue Sacré', '567-345-1234', 'Bob@gmail.com', '123');
-insert into Clients (nomClient, adresseClient, telephoneClient, email, password) values ('Jacques', '788 chemin Bateau', '342-415-7263', 'Jacquou36@hotmail.ca', '123');
-insert into Clients (nomClient, adresseClient, telephoneClient, email, password) values ('Marielle', '156 monté Crouton', '436-908-8267', 'Mariemielle86@gmail.com', '123');
+insert into Clients (nomClient, adresseClient, telephoneClient, email, password, isAdmin) values ('Bob', '23 rue Sacré|A1B 2C3', '567-345-1234', 'Bob@gmail.com', '123', 0);
+insert into Clients (nomClient, adresseClient, telephoneClient, email, password, isAdmin) values ('Jacques', '788 chemin Bateau|K3K 3K3', '342-415-7263', 'Jacquou36@hotmail.ca', '123', 0);
+insert into Clients (nomClient, adresseClient, telephoneClient, email, password, isAdmin) values ('Marielle', '156 monté Crouton|L8U 2E5', '436-908-8267', 'Mariemielle86@gmail.com', '123', 0);
+insert into Clients (nomClient, adresseClient, telephoneClient, email, password, isAdmin) values("admin", "1234 rue des roseaux|Q1Q 1Q1", "(514) 222-3234", "admin@gmail.com", "password", 1);
 $$
 
 #f. Au moins 3 billets par présentation. Les billets ne doivent pas être tous dans la même section
