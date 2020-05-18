@@ -19,12 +19,11 @@
 
     //Validation Posts*****************************************************
     if(!Validator::validate_login_email($email)){
-        var_dump($email);
         $_SESSION['errorLogin'] = true;
         $_SESSION['errorEmailLogin'] = "L'adresse courriel est invalide";
     }
     if(!Validator::validate_login_password($pw)){
-        var_dump($pw);
+        
         $_SESSION['errorLogin'] = true;
         $_SESSION['errorPasswordLogin'] = "Le mot de passe est invalide";
     }
@@ -52,6 +51,7 @@
     $_SESSION['email'] = $aClient->courrielClient;
     $_SESSION['adresse'] = $aClient->adresseClient;
     $_SESSION['telephone'] = $aClient->telephoneClient;
+    $_SESSION['Panier'] = array();
    
 
     
