@@ -2,15 +2,16 @@
     //include "../CLASSES/USER/user.php";
     include "../UTILS/formvalidator.php";
     include __DIR__ . "/../UTILS/sessionhandler.php";
-
+    require '../UTILS/imageHelper.php';
     session_start();
 
-
+  
     //prendre les variables du Post
     $nom = $_POST["nom"];
     $category = $_POST["categorie"];
     $prix = $_POST["prix"];
-    $affiche = $_POST["affiche"];
+    $_SESSION['imageHelper']->basePath = '../Images';
+    $affiche = $_SESSION['imageHelper']->upLoadImage();
     $descriptionn = $_POST["description"];
     $artiste = $_POST["artiste"];
     $i = 0;
@@ -26,7 +27,7 @@
     
  
      $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
-     $stmt1 = $mybd->prepare("CALL InsertSpectacle(?,?,?,?,?,?)");
+     $stmt1 = $mybd->prepare("CALL InsertSpectacles(?,?,?,?,?,?)");
     //  // lier les paramètres
      $stmt1->bindParam(1, $nomSpectacle);
      $stmt1->bindParam(2, $idCategorie);
@@ -47,7 +48,7 @@
      $stmt1->execute();
      if ($donnees = $stmt1->fetch())
      {
-        $idSpectaclee = $donnees[0];
+        $idSpectaclee = $donnees['MAX(idSpectacle)'];
      } 
 
      $mybd=null;
@@ -65,7 +66,7 @@
         $idSpectacle = $idSpectaclee;
         $idSalle = $salles[$y];
         $date = $dates[$y];
-   
+
          // executer la requête
         $stmt1->execute();
            
