@@ -3,7 +3,7 @@
 	try
 	{
 		$Spectacles = array();
-		$mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'prototype14');
+		$mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
 		$resultat = $mybd->query("call BaseSortSpectacles");
 		echo "
 				<div class='grid-container'>";
@@ -22,13 +22,10 @@
 						<div>
 							<b style='font-size:30px; align-content:center'>
 								$titre
-							</b> 
-							<a href='Achats.php?id=$id' style='float:right'>
-								<button>
-									Achat
-								</button>
-							</a>
-						</div>
+							</b> ";
+							AfficherAchat($id);
+							
+						echo "</div>
 						<a href='DetailSpectacle.php?id=$id'>
 							<img class='rounded' width='304' height='236' src='Images/$GUID' alt='$titre'>
 						</a>
@@ -72,7 +69,7 @@
 	$mybd=null;
 
 	function GetSallesSpectacles($id){
-		$mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'prototype14');
+		$mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
 		$val = $mybd->prepare("CALL SelectForSallesSpectacles(?)");
 		$val->bindParam(1,$id);
 		$val->execute();
@@ -81,6 +78,15 @@
 			array_push($sallesParSpectacle, $donnesSalles['nomSalles']);
 		}
 		return $sallesParSpectacle;
+	}
+	function AfficherAchat($id){
+		if (isset($_SESSION["Client"])) {
+			echo "<a href='Achats.php?id=$id' style='float:right'>
+				<button>
+					Achat
+				</button>
+			</a>";
+		}
 	}
 ?>
 
