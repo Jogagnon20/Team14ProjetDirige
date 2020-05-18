@@ -22,10 +22,13 @@
 						<div>
 							<b style='font-size:30px; align-content:center'>
 								$titre
-							</b> ";
-							AfficherAchat($id);
-							
-						echo "</div>
+							</b> 
+							<a href='Achats.php?id=$id' style='float:right'>
+								<button>
+									Achat
+								</button>
+							</a>
+						</div>
 						<a href='DetailSpectacle.php?id=$id'>
 							<img class='rounded' width='304' height='236' src='Images/$GUID' alt='$titre'>
 						</a>
@@ -78,15 +81,6 @@
 			array_push($sallesParSpectacle, $donnesSalles['nomSalles']);
 		}
 		return $sallesParSpectacle;
-	}
-	function AfficherAchat($id){
-		if (isset($_SESSION["Client"])) {
-			echo "<a href='Achats.php?id=$id' style='float:right'>
-				<button>
-					Achat
-				</button>
-			</a>";
-		}
 	}
 ?>
 
