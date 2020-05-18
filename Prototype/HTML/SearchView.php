@@ -1,6 +1,6 @@
 <h1 class="my-4">Résultat de recherche</h1>
 <?php
-  $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'prototype14'); 
+  $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14'); 
   $tabRecherche = array();
   $recherche = ($_GET["search"]);
   if(isset($_GET['RechercheAvance'])){
@@ -18,7 +18,7 @@
     $i++;
   }
   if(empty($recherche) && $rechercheAvance !== "Categorie" ){
-    $mybd2 = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'prototype14'); 
+    $mybd2 = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14'); 
     $test = $mybd2->query("CALL BaseSortSpectacles");
     while ($val = $test->fetch(PDO::FETCH_ASSOC)){
       array_push($tabRecherche, $val['idSpectacle']);
@@ -140,7 +140,7 @@
       }
     }
     function GetSallesSpectacles($id){
-      $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'prototype14');
+      $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
       $val = $mybd->prepare("CALL SelectForSallesSpectacles(?)");
       $val->bindParam(1,$id);
       $val->execute();
