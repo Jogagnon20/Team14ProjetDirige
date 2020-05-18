@@ -1,5 +1,6 @@
 <h2>Détails des spectacles à venir</h2>
 <?php 
+	$imageHelper = new ImageHelper('./Images','No_image.png') ;
 	try
 	{
 		$Spectacles = array();
@@ -15,6 +16,10 @@
 			$titre = $donnees['nomSpectacle'];
 			$artiste = $donnees['artiste'];
 			$GUID = $donnees['GUID'];
+			$photoURL = $imageHelper->getURL($GUID);
+			if($photoURL[9] != '{'){
+				$photoURL = "Images/$GUID";
+			}
 			$prix = $donnees['prix_de_base'];
 			echo "
 				<div style='display:grid; grid-template-columns: 60% 40%; padding-left:10px'>
@@ -30,7 +35,9 @@
 							</a>
 						</div>
 						<a href='DetailSpectacle.php?id=$id'>
-							<img class='rounded' width='304' height='236' src='Images/$GUID' alt='$titre'>
+						
+							<img class='rounded' width='304' height='236' src='$photoURL' alt='$titre'>
+							
 						</a>
 					</div>
 					<div style='font-size:22px'>
