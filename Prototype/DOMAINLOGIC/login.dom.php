@@ -19,10 +19,12 @@
 
     //Validation Posts*****************************************************
     if(!Validator::validate_login_email($email)){
+        var_dump($email);
         $_SESSION['errorLogin'] = true;
         $_SESSION['errorEmailLogin'] = "L'adresse courriel est invalide";
     }
     if(!Validator::validate_login_password($pw)){
+        var_dump($pw);
         $_SESSION['errorLogin'] = true;
         $_SESSION['errorPasswordLogin'] = "Le mot de passe est invalide";
     }
@@ -40,10 +42,18 @@
     {
         if($donnees['email'] == $email){
             $aClient = new Clients($donnees['idClient'], $donnees['nomClient'], $email, $donnees['adresseClient'], $donnees['telephoneClient']);
+            
         }
     }
     $mybd = null;
     $_SESSION['Client'] = $aClient;
+    $_SESSION['idClient'] = $aClient->idClient;
+    $_SESSION['nomClient'] = $aClient->nomClient;
+    $_SESSION['email'] = $aClient->courrielClient;
+    $_SESSION['adresse'] = $aClient->adresseClient;
+    $_SESSION['telephone'] = $aClient->telephoneClient;
+   
+
     
     $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
     $stmt1 = $mybd->prepare("CALL SelectIsAdminClient(?)");
@@ -57,7 +67,6 @@
         }
     }
     $mybd = null;
-
 
     header("Location: ../Spectacles.php");
     die();
