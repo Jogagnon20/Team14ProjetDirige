@@ -12,11 +12,11 @@ final class Clients{
 
     public function __construct($id, $nom, $courriel, $adresse, $telephone) 
     { 
-       $idClient = $id;
-       $nomClient = $nom;
-       $courrielClient = $courriel;
-       $adresseClient = $adresse;
-       $telephoneClient = $telephone;
+       $this->idClient = $id;
+       $this->nomClient = $nom;
+       $this->courrielClient = $courriel;
+       $this->adresseClient = $adresse;
+       $this->telephoneClient = $telephone;
     } 
 }
 ?>
