@@ -3,7 +3,7 @@
     class Validator{
 
         public static function emailExists($emailP){
-            $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
+            $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
             
             $stmt1 = $mybd->prepare("CALL SelectFromClients()");
             //Liaison des paramètres de la procédure.
@@ -22,7 +22,7 @@
         }
         
         public static function passwordExists($pwP){
-            $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'in6vest14');
+            $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
             
             $stmt1 = $mybd->prepare("CALL SelectFromClients()");
             //Liaison des paramètres de la procédure.
