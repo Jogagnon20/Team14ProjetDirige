@@ -24,12 +24,19 @@
                 color: black;
                 text-align: center;
             }
+            .grid-container-Search {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;grid-template-rows: 1fr 1fr;
+                grid-template-areas: "Picture Picture Title Title" "Picture Picture Description Description";
+                gap: 1px 1px;
+                background-color:lightgray;
+            }
             .grid-container {
                 display: grid;
                 grid-template-columns: 50% 50%;
                 gap: 1px 1px;
                 background-color:lightgray;
-}
+            }
        </style>
     </head>
     <body style="padding-bottom: 100px">
