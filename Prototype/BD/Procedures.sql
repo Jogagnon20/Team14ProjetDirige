@@ -108,9 +108,9 @@ $$
 delimiter $$
 create procedure ListHabitudesClient(in id int)
 BEGIN
-select Count(b.noBillet) as nbBillets, c.Description from Billets b inner join Representations r on b.idRepresentation = r.idRepresentation 
-	inner join Spectacles s on r.idSpectacle = s.idSpectacle inner join Categories c on s.idCategorie = c.idCategorie 
-    where b.idClient = id group by c.Description order by nbBillets desc;
+select Count(b.noBillet) as nbBillets, c.Description from achatsreels ar inner join Billets b on ar.idBillet = b.noBillet 
+	inner join Representations r on b.idRepresentation = r.idRepresentation inner join Spectacles s on r.idSpectacle = s.idSpectacle 
+    inner join Categories c on s.idCategorie = c.idCategorie where b.idClient = id group by c.Description order by nbBillets desc;
 end
 $$
 
