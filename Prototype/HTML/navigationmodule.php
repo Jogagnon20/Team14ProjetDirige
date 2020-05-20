@@ -7,6 +7,10 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="listUsers.php">Liste usagers</a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="ajoutSpectacle.php">Ajout Spectacle</a>
             </li>
 
