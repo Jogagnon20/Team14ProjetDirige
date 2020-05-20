@@ -88,9 +88,9 @@ $$
 delimiter $$
 create procedure SelectOrderClients()
 BEGIN
-select nomClient, adresseClient, email, COUNT(ar.idBillet) as nbBillets from Clients c
-	inner join Billets b on c.idClient = b.idClient inner join achatsreels ar on b.noBillet = ar.idBillet
-    inner join achat a on ar.idAchat = a.idAchat group by nomClient, adresseClient order by nbBillets;
+select c.idClient, nomClient, adresseClient, email, COUNT(ar.idBillet) as nbBillets from Clients c
+	left outer join achat a on c.idClient = a.idClient left outer join achatsreels ar on a.idAchat = ar.idAchat
+    group by c.idClient, adresseClient order by nbBillets desc, nomClient;
 end
 $$
 delimiter $$
