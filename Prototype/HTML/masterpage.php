@@ -26,16 +26,30 @@
             }
             .grid-container-Search {
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;grid-template-rows: 1fr 1fr;
-                grid-template-areas: "Picture Picture Title Title" "Picture Picture Description Description";
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                grid-template-areas: "Picture Title Title" "Picture Description Description";
                 gap: 1px 1px;
-                background-color:lightgray;
+                background-color:#28a745;
             }
             .grid-container {
                 display: grid;
                 grid-template-columns: 50% 50%;
                 gap: 1px 1px;
-                background-color:lightgray;
+                background-color:#28a745;
+            }
+            .grid-container-Billet{
+                display: grid;
+                margin-bottom: 50px;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+                grid-template-rows: 20% 50% 13% 17%;
+                gap: 1px 1px;
+                grid-template-areas: ". Title Title Title Title ." "Picture Picture Artiste Artiste Picture2 Picture2" "Picture Picture Date Date Picture2 Picture2" "SalleCouleur SalleCouleur Adresse Adresse SiteWeb SiteWeb";
+                background-color: #b3ffb3;
+                border: 2px black solid;
+            }
+            .cursive{
+                font-family:cursive;
             }
        </style>
     </head>
