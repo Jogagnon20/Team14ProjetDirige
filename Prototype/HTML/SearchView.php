@@ -144,13 +144,13 @@ function AfficherSpectacleAvecCategorie($tabRecherche, $categorie)
             <a href='DetailSpectacle.php?id=$id'><img class='rounded' width='304' height='236' src='Images/$GUID' alt='$titre'></a>
           </div>
           <div style='grid-area: Title;'>
-            <span style='font-size:30px; align-content:center'><b>$titre</b>";
+            <span style='font-size:50px; align-content:center'><b>$titre</b>";
         AfficherAchat($id);
         echo "</span><br>
           </div>
           <div style='grid-area: Description;'>
-            <span>Fait par: $artiste</span><br>
-            <span>Prix de base: $prix$</span><br> 
+          <div style='font-size:40px'>Fait par: $artiste</div>
+          <div style='font-size:40px'>Prix de base: $prix$</div>
           </div>
         </div>
         <hr>";
