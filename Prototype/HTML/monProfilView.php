@@ -2,66 +2,81 @@
     <div class="row">
         <div class="col-sm-4">
             <h2>Mon Profil</h2>
-            <form action = "./DOMAINLOGIC/profil.dom.php">
-                <div class="form-group">
-                    <label for="Nom">Nom</label>
-                    <?php
-                        
-                        $clientInfo = get_object_vars($_SESSION['Client']);
-                        $nomClient = $clientInfo['nomClient'];
-                        echo "<input type='text' class='form-control' value='$nomClient' name='nomClient' id='nomClient' required>";
-                        
-                    ?>
-                </div>
-                <div class="form-group">
-                    <label for="email">Courriel</label>
-                    <?php
-                        $clientInfo = get_object_vars($_SESSION['Client']);
-                        $courrielClient = $clientInfo['courrielClient'];
-                        echo "<input type='text' class='form-control' value='$courrielClient' name='courrielClient'  id='courrielClient' required>";
-                    ?>
-                </div>
-                <div class="form-group">
-                    <label for="mdp">Nouveau mot de passe</label>
-                    <?php
-                        echo "<input type='password' class='form-control' name='newPassword'>";
-                    ?>
-                </div>
-                <div class="form-group">
-                    <label for="ConfirmationMdp">Confirmation mot de passe</label>
-                    <?php
-                      echo "<input type='password' class='form-control' name='verifPassword'>"
-                    ?>
-                </div>
-                <div class="form-group">
-                    <label for="telephone">Téléphone</label>
-                    <?php
-                        $clientInfo = get_object_vars($_SESSION['Client']);
-                        $telephoneClient = $clientInfo['telephoneClient'];
-                        echo "<input type='text' class='form-control' value='$telephoneClient' name='phone' id='phone'  placeholder='(123) 456-7890' required> <br>";
-                    ?>
-                </div>
-                <div class="form-group">
-                    <label for="adresse">Adresse</label>
-                    <?php
-                        $clientInfo = get_object_vars($_SESSION['Client']);
-                        $adresseClient = $clientInfo['adresseClient'];
-                        $splitAdresse = explode("|", $adresseClient);
-                        echo "<input type='text' class='form-control' value='$splitAdresse[0]' name='adresseClient' id='adresseClient' required>";
-                    ?>
-                </div>
-                <div class="form-group">
-                    <label for="adresse">Code Postal</label>
-                    <?php
-                        $clientInfo = get_object_vars($_SESSION['Client']);
-                        $adresseClient = $clientInfo['adresseClient'];
-                        $splitAdresse = explode("|", $adresseClient);
+            <?php 
+              try
+              {
+                $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
+                $stmt = $mybd->prepare("CALL SelectClientWhereId(?)");
+                $stmt->bindParam(1, $_SESSION['idClient']);
+                $stmt->execute();
+                while ($donnees = $stmt->fetch(PDO::FETCH_ASSOC))
+                {
+                  $nom = $donnees['nomClient'];
+                  $email = $donnees['email'];
+                  $tel = $donnees['telephoneClient'];
+                  $splitAdresse = explode("|", $donnees['adresseClient']);
+                  echo "
+                  <form action = './DOMAINLOGIC/profil.dom.php'>
+                    <div class='form-group'>
+                      <label for='Nom'>Nom</label> 
+                      <input type='text' class='form-control' value='$nom' name='nomClient' id='nomClient' required>
+                    </div>
+                    
+                    <div class='form-group'>
+                      <label for='email'>Courriel</label>
+                      <input type='text' class='form-control' value='$email' name='courrielClient'  id='courrielClient' required>";
+                        if(isset( $_SESSION['errorEmail'])){
+                          $Eemail = $_SESSION['errorEmail'];
+                          echo "<div style='color:red'> $Eemail </div>";
+                        }
+                    echo "</div>
 
-                        echo "<input type='text' class='form-control' value='$splitAdresse[1]' name='codePostal' id='adresseClient' required>";
-                    ?>
-                </div>
-                <button class="btn btn-success" type="submit">Enregistrer les changements</button>
-            </form>
+                    <div class='form-group'>
+                        <label for='mdp'>Nouveau mot de passe</label>
+                        <input type='password' class='form-control' name='newPassword'>
+                    </div>
+
+                    <div class='form-group'>
+                        <label for='ConfirmationMdp'>Confirmation mot de passe</label>
+                        <input type='password' class='form-control' name='verifPassword'>";
+                            if(isset( $_SESSION['errorPassword'])){
+                                $Epassword = $_SESSION['errorPassword'];
+                                echo "<div style='color:red'> $Epassword </div>";
+                            }
+                    echo "</div>
+
+                    <div class='form-group'>
+                        <label for='telephone'>Téléphone</label>
+                        <input type='text' class='form-control' value='$tel' name='phone' id='phone'  placeholder='(123) 456-7890' required>
+                    </div>
+
+                    <div class='form-group'>
+                        <label for='adresse'>Adresse</label>
+                            
+                            <input type='text' class='form-control' value='$splitAdresse[0]' name='adresseClient' id='adresseClient' required>
+                    </div>
+
+                    <div class='form-group'>
+                        <label for='adresse'>Code Postal</label>
+                        <input type='text' class='form-control' value='$splitAdresse[1]' name='codePostal' id='adresseClient' required>";
+                        if(isset( $_SESSION['errorPC'])){
+                          $Epc = $_SESSION['errorPC'];
+                          echo "<div style='color:red'> $Epc </div>";
+                        }
+                    echo "</div>
+
+                    <button class='btn btn-success' type='submit'>Enregistrer les changements</button>
+                  </form>";
+                }
+                $stmt->closeCursor();
+              }
+              catch (PDOException $e)
+              {
+                  echo('Erreur de connexion: ' . $e->getMessage());
+                  exit();
+              }
+              $mybd=null;
+          ?>
         </div>
     </div>
 </div>
