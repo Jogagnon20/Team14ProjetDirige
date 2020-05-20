@@ -88,8 +88,9 @@ $$
 delimiter $$
 create procedure SelectOrderClients()
 BEGIN
-select nomClient, adresseClient, telephoneClient, email, COUNT(noBillet) as nbBillets from Clients c
-	inner join Billets b on c.idClient = b.idClient group by nomClient, adresseClient, telephoneClient order by nbBillets;
+select nomClient, adresseClient, email, COUNT(ar.idBillet) as nbBillets from Clients c
+	inner join Billets b on c.idClient = b.idClient inner join achatsreels ar on b.noBillet = ar.idBillet
+    inner join achat a on ar.idAchat = a.idAchat group by nomClient, adresseClient order by nbBillets;
 end
 $$
 delimiter $$
@@ -99,6 +100,17 @@ delimiter $$
 create procedure SelectClientWhereId(in id int)
 BEGIN
 select * from Clients where Clients.idClient = id;
+end
+$$
+delimiter $$
+drop procedure if exists ListHabitudesClient
+$$
+delimiter $$
+create procedure ListHabitudesClient(in id int)
+BEGIN
+select Count(b.noBillet) as nbBillets, c.Description from Billets b inner join Representations r on b.idRepresentation = r.idRepresentation 
+	inner join Spectacles s on r.idSpectacle = s.idSpectacle inner join Categories c on s.idCategorie = c.idCategorie 
+    where b.idClient = id group by c.Description order by nbBillets desc;
 end
 $$
 
