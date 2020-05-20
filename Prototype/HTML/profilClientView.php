@@ -25,6 +25,7 @@
                     <div style='padding-left:30px; padding-right:30px'>";
                         try
                         {
+                            $nbdiv = 0;
                             $mybd2 = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
                             $stmt2 = $mybd2->prepare("CALL ListHabitudesClient(?)");
                             $stmt2->bindParam(1,$_GET['id']);
@@ -34,6 +35,10 @@
                                 $nbBillets = $donnees2['nbBillets'];
                                 $description = $donnees2['Description'];
                                 echo "<div>$nbBillets - $description</div>";
+                                $nbdiv++;
+                            }
+                            if ($nbdiv == 0){
+                                echo "<div>Ce client n'a toujours pas acheté de billets</div>";
                             }
                             $stmt2->closeCursor();
                         }
