@@ -1,11 +1,10 @@
 <h1>Votre Panier</h1>
 <?php 
-
     $panier = $_SESSION['Panier'];
     if(count($panier)>0){
-        foreach($panier as $item){
-            $nbBillet = $item[1];
-            $idBillet = $item[0][0];
+        for($i = count($panier)-1;$i>=0;$i--){
+            $item = $panier[$i];
+            $idBillet = $item[0];
             $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14'); 
             $stmt = $mybd->prepare("call GetBilletByID(?)");
             $stmt->bindParam(1,$idBillet);
@@ -20,6 +19,7 @@
                 $adresse = $donnees['Adresse'];
                 $artiste = $donnees['artiste'];
                 $prixBillet = $donnees['prixBillet'];
+                $nbBillet = $donnees['quantiteDemande'];
                 AfficherBillet($couleur, $nomSpectacle, $nomSalle, $GUID, $date, $adresse, $artiste, $nbBillet, $idBillet, $prixBillet);
             }
         } 
@@ -64,17 +64,25 @@
                 notresite.com
             </div>
         </div><div style='text-align:center'>";
+        
         AfficherNbBillet($nbBillet, $idBillet, $prixBillet);
         
         echo" 
-        
+        <hr>
+        <form action='./DOMAINLOGIC/modifierPanier.dom.php'>
+            <input value='$idBillet' style='display:none' name='idBillet'>
+            <textarea style='display:none' class='nbBillet$idBillet' name='nbBillet'>
+                $nbBillet
+            </textarea>
+            <button class='btn btn-outline-warning' type='submit'>Mettre à jour <br>le nombre de billet</button>
+        </form>
         <hr>
         <form action='./DOMAINLOGIC/supprimerPanier.dom.php'>
             <input value='$idBillet' style='display:none' name='idBillet'>
             <button class='btn btn-outline-danger' type='submit'>Supprimer du panier</button>
         </form>
         <hr>
-        <form action='./DOMAINLOGIC/acheterBillet.dom.php'>
+        <form action='./DOMAINLOGIC/VerifierNombreBillet.dom.php'>
             <input value='$idBillet' style='display:none' name='idBillet'>
             <textarea style='display:none' class='nbBillet$idBillet' name='nbBillet'>
                 $nbBillet
@@ -91,12 +99,21 @@
         <button class='btn btn-outline-secondary' onClick='ChangeNbBillet(-1, $idBillet, $prixBillet)' style='width:45px; font-size:30px'>-</button>
         <span class='nbBillet$idBillet'>$nbBillet</span> billets
         <button class='btn btn-outline-secondary' onClick='ChangeNbBillet(1, $idBillet, $prixBillet)' style='width:45px; font-size:30px'>+</button>
-        <div id='prixBillet$idBillet'>". number_format($prixBillet*$nbBillet,2)." $</div>
+        <div id='prixBillet$idBillet'>". number_format($prixBillet*$nbBillet,2)." $</div>";
+        if(isset($_GET['error'])){
+            $capacite = $_GET['error'];
+            echo "<div style='font-style: italic; color: red'>
+                    Désolé, le nombre de billets sélectionnés dépasse la quantité de
+                    billets restante dans cette section, soit $capacite billets.
+                    SVP, choisir une quantité de billets plus petite ou égale au nombre de billets restants pour cette section.
+                        </div";
+        }
+        echo"
         </div>
         ";
     }
     function FormatDate($date){
-        $chaine = dateToFrench($date,"l j F Y g")."h";
+        $chaine = dateToFrench($date,"l j F Y G")."h";
         return $chaine;
     }
     
@@ -107,10 +124,6 @@
         $english_months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
         $french_months = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
         return str_replace($english_months, $french_months, str_replace($english_days, $french_days, date($format, strtotime($date) ) ) );
-    }
-    function AcheterPanier(){
-        var_dump('allo');
-        echo 'allo';
     }
 ?>
 
