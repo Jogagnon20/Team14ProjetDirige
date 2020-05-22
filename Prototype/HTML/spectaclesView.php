@@ -1,5 +1,6 @@
 <h2>Détails des spectacles à venir</h2>
 <?php 
+	require "./UTILS/imageHelper.php";
 	$imageHelper = new ImageHelper('./Images','No_image.png') ;
 	try
 	{
