@@ -51,8 +51,19 @@
     $_SESSION['email'] = $aClient->courrielClient;
     $_SESSION['adresse'] = $aClient->adresseClient;
     $_SESSION['telephone'] = $aClient->telephoneClient;
-    $_SESSION['Panier'] = array();
-   
+
+    
+
+    $noBillet = array();
+    $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14'); 
+    $stmt = $mybd->prepare("call GetAllBilletbyClient(?)");
+    $stmt->bindParam(1,$aClient->idClient);
+    $stmt->execute();
+    while($donnees = $stmt->fetch()){
+        array_push($noBillet,$donnees);
+    }
+    
+    $_SESSION['Panier'] = $noBillet;
 
     
     $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
