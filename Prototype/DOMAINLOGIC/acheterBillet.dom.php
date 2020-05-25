@@ -1,8 +1,11 @@
 <?php 
     session_start();
     $idClient = $_SESSION['idClient'];
-    $nbBillet = $_GET['nbBillet'];
-    $imprime = $_GET['imprime'];
+    $nbBillets = $_GET['nbBillet'];
+    $idBillet = $_GET['idBillet'];
+    $imprime = 0;
+    if ($_GET['imprime'] === "on")
+        $imprime = 1;
 
     $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14'); 
     $stmt = $mybd->prepare("call InsertAchat(?,?)");
@@ -23,24 +26,10 @@
     $stmt = $mybd->prepare("call InsertAchatReel(?,?,?,?)");
     $stmt->bindParam(1,$idBillet);
     $stmt->bindParam(2,$lastId);
-    $stmt->bindParam(3,$nbBillet);
+    $stmt->bindParam(3,$nbBillets);
     $stmt->bindParam(4,$imprime);
     $res = $stmt->execute();
 
-    $idBillet = $_GET['idBillet'];
-    $panier = $_SESSION['Panier'];
-    foreach($panier as $item){
-        if($idBillet == $item[0]){
-            $no = array_search($item,$_SESSION['Panier']);
-            unset($_SESSION['Panier'][$no]);
-        }
-    }
-
-    $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14'); 
-    $stmt = $mybd->prepare("call DeleteBillet(?)");
-    $stmt->bindParam(1,$idBillet);
-    $stmt->execute();
-
-    header("Location: ../Panier.php");
+    header("Location: ../facture.php?id=$idBillet&nbBillets=$nbBillets");
     die();
 ?>
