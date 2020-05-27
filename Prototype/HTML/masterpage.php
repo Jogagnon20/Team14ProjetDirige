@@ -59,8 +59,12 @@
             <?php  load_modules($content); ?>
         </div>
         <footer class="footer" style="text-align:center; ">
+        <input style='position: relative; margin-left: 500px;' type='button' onclick="document.location.href='spectacles.php';" value='Retour'/>
             <p>Fait par : Danny Léveillé, Guillaume Paquin, Jonathan Gagnon,  Nicolas Dalpé</p>
             <p id="DateNow"></p>
+
+            
+
         </footer>
 
         <script>
