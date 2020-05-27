@@ -29,11 +29,9 @@
 							<b style='font-size:30px; align-content:center'>
 								$titre
 							</b> 
-							<a href='Achats.php?id=$id' style='float:right'>
-								<button>
-									Achat
-								</button>
-							</a>
+							<a href='Achats.php?id=$id' style='float:right'>";AfficherAchat($id);
+								
+							echo "</a>
 						</div>
 						<a href='DetailSpectacle.php?id=$id'>
 						
@@ -79,6 +77,16 @@
 	}
 	$mybd=null;
 
+	function AfficherAchat($id)
+{
+  if (isset($_SESSION["idClient"])) {
+    echo "<a href='Achats.php?id=$id' style='float:right'>
+          <button>
+            Achat
+          </button>
+        </a>";
+  }
+}
 	function GetSallesSpectacles($id){
 		$mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
 		$val = $mybd->prepare("CALL SelectForSallesSpectacles(?)");
