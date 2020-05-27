@@ -99,6 +99,40 @@
             }
             return false;
         }
+        
+        public static function validate_profil_email($email, $idClient){
+            if(empty($email))
+            {
+                return false;
+            }
+            if(self::emailExists($email)){
+                $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
+                $stmt = $mybd->prepare("CALL SelectClientWhereId(?)");
+                $stmt->bindParam(1, $_SESSION['idClient']);
+                $stmt->execute();
+                while ($donnees = $stmt->fetch(PDO::FETCH_ASSOC))
+                {
+                    if($donnees['email'] == $email){
+                        $mybd = null;
+                        return true;
+                    }
+                }
+                $mybd = null;
+                return false;
+            }
+            $reg="/^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/";
+            if(preg_match_all($reg, $email))
+            {
+                return true;
+            }
+        }
+        
+        public static function validate_profil_password($np, $vp){            
+            if($np === $vp){
+                return true;
+            }
+            return false;
+        }
 
 
         public static function validate_PostalCode($pc){
