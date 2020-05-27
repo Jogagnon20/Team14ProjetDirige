@@ -21,7 +21,7 @@
         $_SESSION['errorPC'] = "Le code postal ne convient pas"; 
         $_SESSION['error'] = true;
     }
-    if(!Validator::validate_email($email)){
+    if(!Validator::validate_profil_email($email, $_SESSION['idClient'])){
         $_SESSION['errorEmail'] = "L'adresse courriel est déja utilisée"; 
         $_SESSION['error'] = true;
     }
