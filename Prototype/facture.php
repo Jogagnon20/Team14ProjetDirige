@@ -1,10 +1,8 @@
 <?php
     session_start();
 
-    if(isset($_SESSION["userID"]))
-    {
-        header("Location: ../error.php?ErrorMSG=Already%20Logged!");
-        die();
+    if(!isset($_SESSION["Client"])){
+        header("Location: login.php");
     }
 
     $title = "Facture";
