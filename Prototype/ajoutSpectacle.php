@@ -4,10 +4,10 @@
     if(!isset($_SESSION["Admin"]))
     {
         if(isset($_SESSION["Client"])){
-            header("Location: ../spectacles.php");
+            header("Location: spectacles.php");
         }
         else{
-            header("Location: ../login.php");
+            header("Location: login.php");
         }
     }
 
