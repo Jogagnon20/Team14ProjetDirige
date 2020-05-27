@@ -8,14 +8,25 @@ if (isset($_GET['RechercheAvance'])) {
 } else {
   $rechercheAvance = "NomSpectacle";
 }
+$elementsRecherche = array();
+
+foreach($_GET as $item){
+  array_push($elementsRecherche, $item); 
+}
 
 $Categories = array();
 $i = 0;
-foreach ($_GET as $item) {
+foreach ($elementsRecherche as $item) {
   if ($i > 1) {
     array_push($Categories, $item);
   }
   $i++;
+}
+if(Count($elementsRecherche)<=1){
+  $resultatCategorie = $mybd->query("CALL SelectFromCategories");
+  while ($donnees = $resultatCategorie->fetch(pdo::FETCH_ASSOC)) {
+    array_push($Categories,$donnees['idCategorie']);
+  }
 }
 if (empty($recherche) && $rechercheAvance !== "Categorie") {
   $mybd2 = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
@@ -43,11 +54,12 @@ if (empty($recherche) && $rechercheAvance !== "Categorie") {
     }
     $stmt->closeCursor();
   }
-  if ($rechercheAvance === "Categorie") {
-    $resultatSpectacles = $mybd->query("CALL SelectForCategoriesSpectacles");
+  if ($rechercheAvance === "Categorie") 
+    $resultatSpectacles = $mybd->query("CALL SelectForCategoriesSpectacles");{
     while ($donnees = $resultatSpectacles->fetch(PDO::FETCH_ASSOC)) {
       foreach ($Categories as $item) {
         if ($item === $donnees['idCategorie']) {
+          
           array_push($tabRecherche, $donnees['idSpectacle']);
         }
       }
@@ -69,20 +81,26 @@ if (empty($recherche) && $rechercheAvance !== "Categorie") {
   }
 }
 if ($rechercheAvance == "Categorie") {
-  foreach ($Categories as $categorie) {
-    echo "<div><h3>";
-    AfficherCategorie($categorie);
-    echo "</h3>";
-    AfficherSpectacleAvecCategorie($tabRecherche, $categorie);
+  if(!is_null($recherche)){
+    foreach($Categories as $categorie) {
+        echo "<div><h3>";
+        AfficherCategorie($categorie);
+        echo "</h3>";
+        AfficherSpectacleAvecCategorie($tabRecherche, $categorie);
+      }
+      echo "<div/>";
   }
-  echo "<div/>";
+  else{
+    AfficherSpectacle($tabRecherche);
+  }
+  
 } else {
   AfficherSpectacle($tabRecherche);
 }
 
 function AfficherAchat($id)
 {
-  if (isset($_SESSION["Client"])) {
+  if (isset($_SESSION["idClient"])) {
     echo "<a href='Achats.php?id=$id' style='float:right'>
           <button>
             Achat
@@ -144,13 +162,13 @@ function AfficherSpectacleAvecCategorie($tabRecherche, $categorie)
             <a href='DetailSpectacle.php?id=$id'><img class='rounded' width='304' height='236' src='Images/$GUID' alt='$titre'></a>
           </div>
           <div style='grid-area: Title;'>
-            <span style='font-size:30px; align-content:center'><b>$titre</b>";
-        AfficherAchat($id);
-        echo "</span><br>
+            <span style='font-size:50px; align-content:center'><b>$titre</b>";
+      AfficherAchat($id);
+      echo "</span><br>
           </div>
           <div style='grid-area: Description;'>
-            <span>Fait par: $artiste</span><br>
-            <span>Prix de base: $prix$</span><br> 
+            <div style='font-size:40px'>Fait par: $artiste</div>
+            <div style='font-size:40px'>Prix de base: $prix$</div>
           </div>
         </div>
         <hr>";

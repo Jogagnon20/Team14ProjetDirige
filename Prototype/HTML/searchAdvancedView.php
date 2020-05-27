@@ -8,7 +8,7 @@
             <option id='test' value="Categorie">Categorie</option>
         </select>
         <hr>
-        <input type="text" name="search" placeholder="Recherche">
+        <input type="text" name="search" placeholder="Recherche" id="text">
         <hr>
         <?php
         $mybd = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
@@ -39,6 +39,7 @@
             choice = $(this).val();
             if (choice == "Categorie") {
                 $("#typeCategorie").css("display", "block");
+                $("#text").css("display", "none")
             } else {
                 $("#typeCategorie").css("display", "none");
             }
