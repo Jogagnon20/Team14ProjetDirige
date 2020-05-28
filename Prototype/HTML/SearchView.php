@@ -54,8 +54,8 @@ if (empty($recherche) && $rechercheAvance !== "Categorie") {
     }
     $stmt->closeCursor();
   }
-  if ($rechercheAvance === "Categorie") 
-    $resultatSpectacles = $mybd->query("CALL SelectForCategoriesSpectacles");{
+  if ($rechercheAvance === "Categorie") {
+    $resultatSpectacles = $mybd->query("CALL SelectForCategoriesSpectacles");
     while ($donnees = $resultatSpectacles->fetch(PDO::FETCH_ASSOC)) {
       foreach ($Categories as $item) {
         if ($item === $donnees['idCategorie']) {
