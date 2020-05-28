@@ -22,7 +22,7 @@ foreach ($elementsRecherche as $item) {
   }
   $i++;
 }
-if(Count($elementsRecherche)<=1){
+if(Count($Categories)==0){
   $resultatCategorie = $mybd->query("CALL SelectFromCategories");
   while ($donnees = $resultatCategorie->fetch(pdo::FETCH_ASSOC)) {
     array_push($Categories,$donnees['idCategorie']);
@@ -55,19 +55,20 @@ if (empty($recherche) && $rechercheAvance !== "Categorie") {
     $stmt->closeCursor();
   }
   if ($rechercheAvance === "Categorie") {
-    $resultatSpectacles = $mybd->query("CALL SelectForCategoriesSpectacles");
-    while ($donnees = $resultatSpectacles->fetch(PDO::FETCH_ASSOC)) {
+    $mybd2 = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
+    $resultatSpectacles1 = $mybd2->query("CALL SelectForCategoriesSpectacles"); 
+    while ($donnees = $resultatSpectacles1->fetch(PDO::FETCH_ASSOC))  {
       foreach ($Categories as $item) {
         if ($item === $donnees['idCategorie']) {
-          
           array_push($tabRecherche, $donnees['idSpectacle']);
         }
       }
     }
-    $resultatSpectacles->closeCursor();
+    $resultatSpectacles1->closeCursor();
   }
+  
+  
   if ($rechercheAvance === "NomArtiste") {
-
     $resultatSpectacles = $mybd->query("CALL SelectForArtistesSpectacles");
     while ($donnees = $resultatSpectacles->fetch(PDO::FETCH_ASSOC)) {
       if (strpos(strtolower($donnees['artiste']),  strtolower($recherche)) !== false) {
