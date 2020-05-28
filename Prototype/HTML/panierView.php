@@ -83,6 +83,8 @@
         </form>
         <hr>
         <form action='./DOMAINLOGIC/VerifierNombreBillet.dom.php'>
+            <label>Imprimé</label>
+            <input type='checkbox' name='imprime'><br>
             <input value='$idBillet' style='display:none' name='idBillet'>
             <textarea style='display:none' class='nbBillet$idBillet' name='nbBillet'>
                 $nbBillet
@@ -102,6 +104,8 @@
         <div id='prixBillet$idBillet'>". number_format($prixBillet*$nbBillet,2)." $</div>";
         if(isset($_GET['error'])){
             $capacite = $_GET['error'];
+            $idErrorBillet = $_GET['idBillet'];
+            if($idBillet == $idErrorBillet)
             echo "<div style='font-style: italic; color: red'>
                     Désolé, le nombre de billets sélectionnés dépasse la quantité de
                     billets restante dans cette section, soit $capacite billets.
