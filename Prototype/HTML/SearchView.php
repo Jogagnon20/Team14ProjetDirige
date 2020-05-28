@@ -36,8 +36,8 @@ if (empty($recherche) && $rechercheAvance !== "Categorie") {
   }
 } else {
   if ($rechercheAvance === "NomSpectacle") {
-    
-    $resultatSpectacles = $mybd->prepare("CALL SelectForNomSpectacles(?)");
+    $mybd5 = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
+    $resultatSpectacles = $mybd5->prepare("CALL SelectForNomSpectacles(?)");
     $resultatSpectacles->bindParam(1, $recherche);
     $resultatSpectacles->execute();
     while ($donnees = $resultatSpectacles->fetch(PDO::FETCH_ASSOC)) {
@@ -46,7 +46,8 @@ if (empty($recherche) && $rechercheAvance !== "Categorie") {
     $resultatSpectacles->closeCursor();
   }
   if ($rechercheAvance === "NomSalle") {
-    $stmt = $mybd->prepare("CALL SelectSortedSalles(?)");
+    $mybd4 = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
+    $stmt = $mybd4->prepare("CALL SelectSortedSalles(?)");
     $stmt->bindParam(1, $recherche);
     $stmt->execute();
     while ($donnees = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -69,7 +70,8 @@ if (empty($recherche) && $rechercheAvance !== "Categorie") {
   
   
   if ($rechercheAvance === "NomArtiste") {
-    $resultatSpectacles = $mybd->query("CALL SelectForArtistesSpectacles");
+    $mybd3 = new PDO('mysql:host=167.114.152.54;dbname=dbequipe14;charset=utf8', 'equipe14', 'Prototype14');
+    $resultatSpectacles = $mybd3->query("CALL SelectForArtistesSpectacles");
     while ($donnees = $resultatSpectacles->fetch(PDO::FETCH_ASSOC)) {
       if (strpos(strtolower($donnees['artiste']),  strtolower($recherche)) !== false) {
         array_push($tabRecherche, $donnees['idSpectacle']);
